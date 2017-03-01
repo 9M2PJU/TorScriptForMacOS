@@ -1,9 +1,14 @@
 #!/usr/bin/env bash
+#
+# https://kremalicious.com/simple-tor-setup-on-mac-os-x/
+# http://leonid.shevtsov.me/post/an-easy-way-to-use-tor-on-os-x/
+#
 
-# 'Wi-Fi' or 'Ethernet' or 'Display Ethernet'
+
+# Choose from 'Wi-Fi' or 'Ethernet' or 'Display Ethernet'
 INTERFACE=Wi-Fi
 
-# Ask for the administrator password upfront
+# Prompt for superuser password
 sudo -v
 
 # Keep-alive: update existing `sudo` time stamp until finished
@@ -18,7 +23,7 @@ function disable_proxy() {
 }
 trap disable_proxy INT
 
-# Let's roll
+# Setting up socks
 sudo networksetup -setsocksfirewallproxy $INTERFACE 127.0.0.1 9050 off
 sudo networksetup -setsocksfirewallproxystate $INTERFACE on
 
